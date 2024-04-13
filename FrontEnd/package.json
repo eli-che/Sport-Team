@@ -1,0 +1,37 @@
+{
+  "name": "teamtracker",
+  "version": "0.0.1",
+  "description": "An application for team tracking. Developed by TeamM8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpiX0R/teamtracker.git"
+  },
+  "author": "TeamM8",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/EpiX0R/teamtracker/issues"
+  },
+  "homepage": "https://github.com/EpiX0R/teamtracker#readme",
+  "dependencies": {
+    "eslint-plugin-flowtype": "^4.6.0",
+    "react": "^16.12.0",
+    "react-redux": "^7.2.0",
+    "redux-persist": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsdoc": "^21.0.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}

@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#STAGED_FILES_JSX=$(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$")
+#STAGED_FILES_JS=$(git diff --cached --name-only --diff-filter=ACM | grep ".js\{0,1\}$")
+
+STAGED_FILES_JSX=$(git diff --cached --name-only --diff-filter=ACM | grep ".jsx\{0,1\}$")
+STAGED_FILES_JS=$(git diff --cached --name-only --diff-filter=ACM | grep ".js\{0,1\}$")
+ESLINT="$(git rev-parse --show-toplevel)/node_modules/.bin/eslint"
+EXITSTATUS=0
+
+# ESLint validation start
+PASS=true
+
+if [[ "$STAGED_FILES_JSX" = "" || "$STAGED_FILES_JS" = "" ]]; then
+    exit 0
+fi
+
+printf "\nValidating Javascript (ESLint)...\n\n"
+
+for FILE in $STAGED_FILES_JSX; do
+    result=$(eslint ${FILE} | grep "problem")
+
+    if [[ "$result" != "" ]]; then
+        printf "\t\033[41mESLint Failed: $FILE\033[0m\n"
+        PASS=false
+    else
+        printf "\t\033[32mESLint Passed: $FILE\033[0m\n"
+    fi
+done
+
+printf "\n\nJavascript (ESLint) validation completed!\n"
+
+if ! $PASS; then
+    printf "\n\033[41mVALIDATION FAILED:\033[0m Your project contains files that should pass ESLint but do not. Please fix the ESLint errors and try again.\n\n"
+    EXITSTATUS=1
+else
+    printf "\n\033[42mVALIDATION SUCCEEDED\033[0m\n\n"
+fi
+# ESLint validation complete
+
+# JSLint validation start
+#PASS=true
+#
+#printf "\nValidating JavaScript (JSLint):\n"
+#
+#for jsfile in ${STAGED_FILES_JS}; do
+#    result=$(jslint ${jsfile} | grep "${jsfile} is OK")
+#    if [[ "$result" != "" ]]; then
+#        printf "\t\033[32mJSLint Passed: ${jsfile}\033[0m"
+#    else
+#        printf "\t\033[31mJSLint Failed: ${jsfile}\033[0m"
+#        PASS=false
+#    fi
+#done
+#
+#printf "\nJavaScript (JSLint) validation complete\n"
+#
+#if ! $PASS; then
+#    # Change exitstatus on fail, so remaining linters won't be interrupted
+#    printf "\n\033[41mVALIDATION FAILED:\033[0m Your project contains files that should pass JSLint but do not. Please fix the JSLint errors and try again.\n"
+#    EXITSTATUS=1
+#else
+#    printf "\n\033[42mVALIDATION SUCCEEDED\033[0m\n\n"
+#fi
+# JSLint validation complete
+
+exit "$EXITSTATUS"

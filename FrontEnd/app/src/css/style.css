@@ -1,0 +1,21 @@
+@import"https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap";
+.login-title-text span{
+    font-family:"Roboto",sans-serif;
+    font-size:5rem
+}
+.login-title-text{
+    margin-top:5rem
+}
+.login-form{
+    margin-top:15rem;
+    text-align:center
+}
+.login-form div{
+    display:block
+}
+.login-form div div{
+    display:inline-block
+}
+.login-form button{
+    margin-top:2rem
+}/*# sourceMappingURL=style.css.map */
